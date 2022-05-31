@@ -4,7 +4,6 @@ const config = process.env;
 const verifyToken = (req, res, next) => {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
-
   if (!token) {
     throw new Error("A token is required for authentication");
   }
@@ -16,6 +15,7 @@ const verifyToken = (req, res, next) => {
       return decoded;
     }
   });
+  req.body.email = verifiedUser.email;
   next();
 };
 
