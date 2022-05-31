@@ -17,18 +17,18 @@ router.get("/", (req, res) => {
 });
 
 //post api for user registration
-router.post("/registration", userRegistration);
+router.post("/v1/registration", userRegistration);
 
 //post api for user login
-router.post("/login", login);
+router.post("/v1/login", login);
 
 // get api for users radio list
-router.get("/fetch", auth, fetchData);
+router.get("/v1/fetch", auth, fetchData);
 
 //delete api for users
-router.post("/delete", auth, deleteData);
+router.post("/v1/delete", auth, deleteData);
 
 //add radio station api for users
-router.post("/add-station", auth, addData);
+router.post("/v1/add-station", auth, addData);
 
 module.exports = router;
