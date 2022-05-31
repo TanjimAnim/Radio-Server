@@ -9,7 +9,7 @@ const login = async (req, res) => {
       return res.status(400).send("All input is required");
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: email });
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign({ email }, process.env.SECRET, {
         expiresIn: "90d",
