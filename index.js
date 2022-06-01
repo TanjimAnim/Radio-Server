@@ -9,6 +9,7 @@ app.use(express.json({ limit: "50mb" }));
 dotenv.config({ path: "./.env" });
 
 app.use("/", routes);
+
 //connection to mongoDB
 mongoose
   .connect(process.env.CONNECTION_URL, {
