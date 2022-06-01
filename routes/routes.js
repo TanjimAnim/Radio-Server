@@ -10,10 +10,13 @@ const deleteData = require("../controllers/deleteData");
 const addData = require("../controllers/addData");
 //defining routes
 
-router.get("/", (req, res) => {
-  res.json({
-    message: "welcome user",
-  });
+router.get("/", auth, (req, res) => {
+  const { email } = req.body;
+  if (email === undefined || email === "undefined" || email === "") {
+    res.json("user not logged in");
+  } else {
+    res.json(`welcome user:${email}`);
+  }
 });
 
 //post api for user registration
