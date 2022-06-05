@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const auth = require("../middlewares/auth");
-
 //import controllers
 const userRegistration = require("../controllers/registration");
 const login = require("../controllers/login");
 const fetchData = require("../controllers/fetchData");
 const deleteData = require("../controllers/deleteData");
 const addData = require("../controllers/addData");
+const oauthRegistration = require("../controllers/oauthRegistration");
 //defining routes
 
 router.get("/", auth, (req, res) => {
@@ -33,5 +33,8 @@ router.post("/v1/delete", auth, deleteData);
 
 //add radio station api for users
 router.post("/v1/add-station", auth, addData);
+
+//get api for google oauth2 url
+router.get("/v1/oauth", oauthRegistration);
 
 module.exports = router;
