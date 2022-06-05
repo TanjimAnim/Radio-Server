@@ -3,9 +3,9 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 const url = require("url");
 const { User } = require("../models");
+const jwt = require("jsonwebtoken");
 
 let authorizationUrl = null;
-let userCredential = null;
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
@@ -55,20 +55,20 @@ const oauthRegistration = async (req, res, next) => {
         //checking if the email exists in database
         if (existingEmail === null || existingEmail.length === 0) {
           // Get access and refresh tokens (if access_type is offline)
-          userCredential = tokens;
+          const userToken = jwt.sign({ email: email }, process.env.SECRET, {
+            expiresIn: "90d",
+          });
 
           const user = await User.create({
             email,
-            token: userCredential.access_token,
+            token: userToken,
           });
           //saving user into the database
           await user.save(function (err, result) {
             if (err) {
               return res.json("some error occured", err);
             } else {
-              return res
-                .status(200)
-                .json({ accesstoken: `${userCredential.access_token}` });
+              return res.status(200).json({ accesstoken: `${user.token}` });
             }
           });
         } else {
