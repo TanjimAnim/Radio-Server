@@ -6,8 +6,10 @@ import {
   Text,
   Button,
   Heading,
+  Center,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 
 export default function SignUpForm() {
   return (
@@ -70,21 +72,46 @@ export default function SignUpForm() {
                   }}
                 />
               </FormControl>
+              <Box
+                as='button'
+                mt='2%'
+                p={2}
+                color='white'
+                fontWeight='bold'
+                borderRadius='md'
+                bgGradient='linear(to-r, teal.500,green.500)'
+                _hover={{
+                  bgGradient: "linear(to-r, red.500, yellow.500)",
+                }}
+                type='submit'
+                value='Submit'
+              >
+                Submit
+              </Box>
             </form>
           </Box>
 
           <Box textAlign='center'>
-            <Text>Or</Text>
+            <Text fontSize='lg' fontWeight={600}>
+              Or
+            </Text>
           </Box>
           <Box marginRight='auto' marginLeft='auto'>
-            <Button
-              w={"full"}
-              maxW={"md"}
-              variant={"outline"}
-              leftIcon={<FcGoogle />}
-            >
-              <Text>Sign Up with Google</Text>
-            </Button>
+            <Center>
+              <Button
+                w={"full"}
+                maxW={"md"}
+                variant={"outline"}
+                leftIcon={<FcGoogle />}
+              >
+                <Text>Sign Up with Google</Text>
+              </Button>
+            </Center>
+          </Box>
+          <Box textAlign='center'>
+            <Text fontSize='lg' fontWeight={700}>
+              Already have an account? <Link href='/signin'>Sign In here!</Link>
+            </Text>
           </Box>
         </Box>
       </Box>
