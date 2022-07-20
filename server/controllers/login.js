@@ -19,7 +19,9 @@ const login = async (req, res) => {
 
       return res.status(200).json({ accesstoken: `${user.token}` });
     } else {
-      return res.status(402).send("Invalid Credentials");
+      return res
+        .status(402)
+        .send("Password or Username is wrong. Please try again");
     }
   } catch (err) {
     return res.json(err);
